@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gitkube Example</title>
+    <style media="screen">
+     body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+     #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px 8px; border-radius: 3px; }
+     #message h2 { color: #4caf50; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+     #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+     #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+     #message a { color: #039be5; text-decoration: none; }
+     #message { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+     #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+     @media (max-width: 600px) {
+       body, #message { margin-top: 0; background: white; box-shadow: none; }
+       body { border-top: 16px solid #4caf50; }
+     }
+     code { font-size: 18px; color: #999; }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Yay!</h2>
+      <h1>Successfully deployed using Gitkube</h1>
+			<p>You have successfully deployed your first application on to a Kubernets cluster using Gitkube.</p>
+			<p>To deploy any further changes to this application, all you need do to is to make the change, commit and push again</p>
+			<code>
+        $ git add [files]<br/>
+        $ git commit -m "[message]"<br/>
+        $ git push [remote] master<br/>
+			</code>
+      <br/>
+    </div>
+  </body>
+</html>
