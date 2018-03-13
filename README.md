@@ -5,13 +5,12 @@ An nginx example application to be used with [gitkube](https://github.com/hasura
 ## Instructions
 
 - Install [gitkube](https://github.com/hasura/gitkube) on your Kubernetes cluster
+  ```sh
+  $ kubectl create -f https://raw.githubusercontent.com/hasura/gitkube/master/manifests/gitkube-setup.yaml
 
-```sh
-$ kubectl create -f https://raw.githubusercontent.com/hasura/gitkube/master/manifests/gitkube-setup.yaml
-
-$ #expose gitkubed service
-$ kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
-```
+  $ #expose gitkubed service
+  $ kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
+  ```
 - Clone this repo:
   ```bash
   $ git clone https://github.com/hasura/gitkube-example
