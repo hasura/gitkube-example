@@ -24,6 +24,17 @@ An nginx example application to be used with [gitkube](https://github.com/hasura
   ```bash
   $ cat ~/.ssh/id_rsa.pub | awk '$0="  - "$0' >> "remote.yaml"
   ```
+- [Multi-node] If you are running a multi-node cluster, `remote.yaml` should specify a `registry` to push and pull from/into the cluster. Read more about this secret [here](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+  ```sh
+    registry:
+    url: "registry.io/user"
+    credentials:
+    # dockercfg secret
+      secretKeyRef:
+        name: regsecret
+        key: .dockercfg
+  ```
+
 - Create the gitkube remote:
   ```bash
   $ kubectl create -f remote.yaml
