@@ -13,7 +13,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: hasura/hello-world:latest
+      - image: nginx
         imagePullPolicy: IfNotPresent
         name: nginx
         ports:
