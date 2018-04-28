@@ -42,7 +42,7 @@ An nginx example application to be used with [gitkube](https://github.com/hasura
 - Wait for the remote url:
   ```bash
   $ kubectl get remote example -o json | jq -r '.status.remoteUrl'
-  # remoteUrl will be like ssh://example-default@[ip-address]/~/git/example-default
+  # remoteUrl will be like ssh://default-example@[ip-address]/~/git/default-example
   ```
   Note that for services exposed as type NodePort, `remoteUrl` will not be filled automatically. Check `.status.remoteUrlDesc` for instructions on manually constructing the `remoteUrl`
 - Create the git remote:
