@@ -1,59 +1,50 @@
-# gitkube-example
+# gitkube-examples
 
 An nginx example application to be used with [gitkube](https://github.com/hasura/gitkube): git push to deploy on to Kubernetes.
 
-## Instructions
+## Installation instructions
 
-- Install [gitkube](https://github.com/hasura/gitkube) on your Kubernetes cluster
-  ```sh
-  $ kubectl create -f https://storage.googleapis.com/gitkube/gitkube-setup-stable.yaml
+### Using kubectl
 
-  $ #expose gitkubed service
-  $ kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
-  ```
-- Clone this repo:
-  ```bash
-  $ git clone https://github.com/hasura/gitkube-example
-  $ cd gitkube-example
-  ```
-- Create a kubernetes deployment and service:
-  ```bash
-  $ kubectl create -f k8s.yaml
-  ```
-- Add your SSH public key to `remote.yaml`:
-  ```bash
-  $ cat ~/.ssh/id_rsa.pub | awk '$0="  - "$0' >> "remote.yaml"
-  ```
-- [Multi-node] If you are running a multi-node cluster, `remote.yaml` should specify a `registry` to push and pull from/into the cluster. Read more about this secret [here](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) and detailed instructions for few registry providers [here](https://github.com/hasura/gitkube/blob/master/docs/registry.md).
-  ```sh
-    registry:
-    url: "docker.io/<user>"
-    credentials:
-    # docker-registry secret name
-      secretRef: regsecret
-  ```
+```sh
+kubectl create -f https://storage.googleapis.com/gitkube/gitkube-setup-stable.yaml
 
-- Create the gitkube remote:
-  ```bash
-  $ kubectl create -f remote.yaml
-  ```
-- Wait for the remote url:
-  ```bash
-  $ kubectl get remote example -o json | jq -r '.status.remoteUrl'
-  # remoteUrl will be like ssh://default-example@[ip-address]/~/git/default-example
-  ```
-  Note that for services exposed as type NodePort, `remoteUrl` will not be filled automatically. Check `.status.remoteUrlDesc` for instructions on manually constructing the `remoteUrl`
-- Create the git remote:
-  ```bash
-  $ git remote add example [remoteUrl]
-  ```
-- Git push to update the nginx application
-  ```bash
-  $ git push example master
-  ```
-- Checkout the application using kubectl proxy:
-  ```bash
-  $ kubectl proxy
-  ```
-  Visit http://localhost:8001/api/v1/namespaces/default/services/nginx/proxy on browser
+#expose gitkubed service
+kubectl --namespace kube-system expose deployment gitkubed --type=LoadBalancer --name=gitkubed
+```
+
+### Using gitkube CLI 
+
+1. Install Gitkube CLI:
+   - Linux/MacOS
+   ``` bash
+   curl https://raw.githubusercontent.com/hasura/gitkube/master/gimme.sh | bash
+   ```
+   - Windows: download the latest [release](https://github.com/hasura/gitkube/releases) and add it to your `PATH`.
+
+2. Use Gitkube CLI to install Gitkube on the cluster:
+   ```bash
+   gitkube install
+   ```
+   
+## Repository configuration
+
+Gitkube works with whatever kind of repository configurations you prefer. Here are some common configurations:
+
+#### Mono-repo
+
+Your git repo contains configuration + code for your entire application including all your microservices and k8s manifests.
+
+Follow the instructions for mono-repo setups below:
+
+- [Mono-repo with K8s yamls and microservices](mono-repo/README.md)
+- [Mono-repo with Helm chart and microservices](mono-repo-helm/README.md)
+
+#### Multi-repo
+
+You have separate repos for your configuration and microservices.
+
+Follow the instructions for multi-repo setup below:
+
+- [Multi-repo with K8s yamls in one repo and microservices in another repo](multi-repo/README.md)
 
