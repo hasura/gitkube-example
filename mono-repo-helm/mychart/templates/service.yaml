@@ -6,7 +6,7 @@ metadata:
     app: www
     hasuraService: custom
   name: www
-  namespace: helm
+  namespace: default
 spec:
   ports:
   - port: 80
