@@ -6,7 +6,7 @@ metadata:
     app: www
     hasuraService: custom
   name: www
-  namespace: multi
+  namespace: default
 spec:
   replicas: 1
   strategy: {}
