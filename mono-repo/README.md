@@ -14,6 +14,7 @@ $ mv gitkube-example-master gitkube-examples
 ```
 $ cd gitkube-examples/mono-repo
 $ git init
+$ git commit -am 'init'
 ```
 
 3. Generate a Remote spec
@@ -47,12 +48,20 @@ $ gitkube remote generate -f myremote.yaml
 
 ```
 $ gitkube remote create -f myremote.yaml
+INFO[0000] remote myremote created                      
+INFO[0000] waiting for remote url                       
+INFO[0000] remote url: ssh://default-myremote@219815023.us-west-2.elb.amazonaws.com/~/git/default-myremote 
+
+  # add the remote to your git repo and push:
+  git remote add myremote ssh://default-myremote@219815023.us-west-2.elb.amazonaws.com/~/git/default-myremote
+  git push myremote master
 ```
 
-5. Git push
+If the LoadBalancer IP for gitkubed is not ready yet, you might have to wait for a few seconds and try again.
+Follow the instructions yielded by the commands to add a new git remote to your repo called "myremote".
+
+5. Git push and deploy
 
 ```
-$ git commit -am "mono repo"
 $ git push myremote master
-
 ```
