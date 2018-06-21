@@ -53,7 +53,7 @@ $ # Edit the manifests section to the following
 manifests:
   helm:
     release: myapp
-    path: mychart
+  path: mychart
 ...
 ```
 
