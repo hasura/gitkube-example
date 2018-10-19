@@ -1,0 +1,25 @@
+apiVersion: gitkube.sh/v1alpha1
+kind: Remote
+metadata:
+  name: example-helm
+  namespace: default
+spec:
+  ## uncomment to add a registry
+  # registry:
+  #   url: "registry.io/user-name"
+  #   credentials:
+  #     secretKeyRef:
+  #       name: regsecret
+  #       key: .dockercfg
+  manifests:
+    helm:
+      release: www-release-1.0
+    path: mono-repo-helm/mychart
+  deployments:
+  - name: www
+    containers: 
+    - name: www
+      path: mono-repo-helm/microservices/nginx
+      dockerfile: mono-repo-helm/microservices/nginx/Dockerfile
+  authorizedKeys:
+  - "ssh-rsa <key>"

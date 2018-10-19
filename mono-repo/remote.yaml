@@ -1,0 +1,24 @@
+apiVersion: gitkube.sh/v1alpha1
+kind: Remote
+metadata:
+  name: example
+  namespace: default
+spec:
+  ## uncomment to add a registry
+  # registry:
+  #   url: "registry.io/user-name"
+  #   credentials:
+  #     secretKeyRef:
+  #       name: regsecret
+  #       key: .dockercfg
+  manifests:
+    helm: {}
+    path: mono-repo/manifests
+  deployments:
+  - name: www
+    containers: 
+    - name: www
+      path: mono-repo/microservices/nginx
+      dockerfile: mono-repo/microservices/nginx/Dockerfile
+  authorizedKeys:
+  - "ssh-rsa <key>"
